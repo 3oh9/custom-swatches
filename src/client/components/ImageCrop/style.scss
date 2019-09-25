@@ -1,0 +1,33 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+  &__image {
+    border-radius: 5px;
+    border-color: rgb(223, 227, 232);
+    border-width: 2px;
+    border-style: solid;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 5px;
+    transition: 0.3s ease;
+    &--active {
+      border-color: #007ace;
+    }
+  }
+  &__title {
+    margin-bottom: 15px;
+  }
+}
+.ReactCrop {
+  .ReactCrop__image {
+    max-height: none;
+  }
+}
+.Polaris-Modal-Dialog__Modal {
+  @media (min-width: 48.0625em) {
+    max-width: 80%;
+  }
+}

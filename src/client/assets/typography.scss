@@ -1,0 +1,271 @@
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
+h1, h2, h3, h4, h5, h6 {
+    margin: 5px 0 10px;
+    font-weight: $font-bold;
+    backface-visibility: hidden;
+}
+
+.h0 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small,
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
+.h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small,
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small {
+    font-size: 50%!important;
+}
+
+.h0 .label .h1 .label, .h2 .label, .h3 .label, .h4 .label, .h5 .label, .h6 .label,
+h1 .label, h2 .label, h3 .label, h4 .label, h5 .label, h6 .label {
+    font-size: 75%!important;
+}
+
+.h0 {
+    font-size: $h0;
+    margin: 0px 0 32px;
+    letter-spacing: 3px;
+    @media (max-width: $screen-xs-max) {
+        font-size: $h2;
+        margin: 0px 0 25px;
+    }
+}
+
+h1,
+.h1 {
+    font-size: $h1;
+    @media (max-width: $screen-xs-max) {
+        font-size: $h3;
+        margin: 0px 0 25px;
+    }
+    @media (min-width: $screen-sm-min) {
+        font-size: $h1;
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        font-size: $h2;
+    }
+}
+
+.h2-width {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.font {
+    &-thin {
+        font-weight: $font-thin;
+    }
+    &-light {
+        font-weight: $font-light;
+    }
+    &-regular {
+        font-weight: $font-regular;
+    }
+    &-semi-bold {
+        font-weight: $font-semi-bold;
+    }
+    &-bold {
+        font-weight: $font-bold;
+    }
+    &-size {
+        &-xs{
+            font-size: $font-size-xs;
+        }
+        &-smx{
+            font-size: $font-size-smx;
+        }
+        &-sm{
+            font-size: $font-size-sm;
+        }
+        &-md{
+            font-size: $font-size-md;
+        }
+        &-lg{
+            font-size: $font-size-lg;
+        }
+        &-h0{
+            font-size: $h0;
+        }
+        &-h1{
+            font-size: $h1;
+        }
+        &-h2{
+            font-size: $h2;
+        }
+        &-h3{
+            font-size: $h3;
+        }
+    }
+}
+
+.default-ls {
+    letter-spacing: 0.3px;
+}
+
+.text {
+    color: $primary;
+
+    &-capitalize {
+        text-transform: capitalize;
+    }
+    &-underline {
+        text-decoration: underline;
+    }
+    &-uppercase {
+        text-transform: uppercase;
+    }
+    &-hide {
+        text-indent: -99999px;
+        color: $none;
+    }
+    &:focus {
+        color: $primary;
+    }
+    &-right {
+        text-align: right;
+    }
+    &-line-through {
+        text-decoration: line-through;
+    }
+    &-center {
+        text-align: center;
+        &-xs {
+            @media (max-width: $screen-xs-max) {
+                text-align: center;
+            }
+            @media (min-width: $screen-sm-min) {
+                text-align: left;
+            }
+        }
+    }
+    &-left {
+        text-align: left;
+        &-xs {
+            @media (max-width: $screen-xs-max) {
+                text-align: left;
+            }
+        }
+    }
+    &-success {
+        &:hover {
+          color: $success;
+        }
+    }
+    &-danger {
+        &:hover {
+          color: $danger;
+        }
+    }
+    &-info {
+        &:hover {
+          color: $info;
+        }
+    }
+    &-primary {
+        &:hover {
+          color: $primary;
+        }
+    }
+    &-muted {
+        &:hover {
+          color: $gray;
+        }
+    }
+    &-primary {
+        &:hover {
+          color: $primary;
+        }
+    }
+    &-warning {
+        &:hover {
+          color: $warning;
+        }
+    }
+    &-color {
+        &-success {
+            color: $success;
+        }
+        &-danger {
+            color: $danger;
+        }
+        &-info {
+            color: $info;
+        }
+        &-primary {
+            color: $primary;
+        }
+        &-muted {
+            color: $gray;
+        }
+        &-primary {
+            color: $primary;
+        }
+        &-warning {
+            color: $warning;
+        }
+        &-white {
+            color: white;
+        }
+        &-gray {
+            @include color-opacity($default, .8);
+        }
+    }
+    &-normal {
+        text-transform: none;
+    }
+    &-bold {
+        font-size: 15px;
+        font-weight: 600;
+        backface-visibility: hidden;
+    }
+}
+
+.word-break {
+    word-break: break-word;
+}
+
+.intro {
+    color: $default-08;
+    line-height: 1.6;
+
+    &-sm {
+        font-size: $font-size-sm;
+    }
+}
+
+.align {
+    &-unset {
+        vertical-align: unset !important;
+    }
+}
+
+.first {
+    &-letter {
+        &-up {
+            &:first-letter {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+p, li, dt, dd {
+    font-size: 14px;
+}
+
+.field-mini-form {
+  
+}
+
+.field {
+  &-mini {
+    &-form {
+      .Polaris-TextField {
+        width: 400px;
+      }
+
+      .Polaris-Button--primary {
+        height: 36px;
+        margin-left: 25px;
+      }
+    }
+  }
+}

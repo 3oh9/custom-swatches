@@ -1,0 +1,88 @@
+.container {
+  display: block;
+  margin: 0 auto;
+
+  &-abs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include translate(-50%, -50%);
+
+    @media (max-width: $screen-xs-max) {
+      width: 68%;
+    }
+  }
+
+  &.container-flex {
+    display: flex;
+  }
+
+  .section {
+    padding: 1.6rem 0;
+  }
+
+  .section-works &,
+  .section-team &,
+  .section-skills &,
+  .section-services & {
+    z-index: 2;
+    position: relative;
+  }
+
+  &-landing {
+    .section-contact-us & {
+      .contact-us-page & {
+        width: 100%;
+      }
+    }
+
+    .contact-us-page & {
+      z-index: 2;
+      position: relative;
+
+      @media (min-width: $screen-lg-max) {
+        width: 100%;
+        padding: 0 100px;
+      }
+
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        width: 100%;
+        padding: 0;
+      }
+    }
+  }
+
+
+
+  &-sm {
+    max-width: 700px;
+    .contact-us-page & {
+      width: 100%;
+      z-index: 1;
+      position: relative;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @media (max-width: $screen-sm-max) and (min-width: $screen-sm-min) {
+    width: 720px;
+  }
+
+  @media (max-width: $screen-md-max) and (min-width: $screen-md-min) {
+    width: 920px;
+  }
+
+  @media (min-width: $screen-lg-min) {
+    width: 1024px;
+  }
+}
+
+.message-container {
+  background-color: $rule-light;
+  padding: 15px;
+}

@@ -1,0 +1,18 @@
+.Polaris-ResourceList__ItemWrapper {
+  .shopifyEditLink {
+    z-index: -1;
+    position: relative;
+    margin-left: 15px;
+    transition: 0.3s ease;
+    opacity: 0;
+  }
+  &:hover {
+    .shopifyEditLink {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+  .product__title {
+    color: #007ace;
+  }
+}

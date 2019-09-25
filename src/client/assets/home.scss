@@ -1,0 +1,30 @@
+.home {
+  &-content {
+    h2 {
+      text-align: center;
+      padding-top: 20%;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      width: 50%;
+      margin: auto;
+    }
+  }
+}
+
+.image {
+  &-background {
+    &-home {
+      background-image: url('../assets/images/header-fallback.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 350px;
+
+      .text-container {
+        h2 {
+          color: #fff;
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}

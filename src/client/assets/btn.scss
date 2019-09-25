@@ -1,0 +1,243 @@
+.btn {
+    font-family: $baseFontFamily;
+    border-radius: 2px;
+    background-color: $gray;
+    color: $primary;
+    min-width: 250px;
+    font-weight: $font-regular;
+    padding: 17px 0;
+    border: 0;
+    font-size: 14px;
+    transition: all .1s ease, background-color .1s ease;
+
+		&-step {
+			background: #009c48;
+			color: white;
+			font-weight: 500;
+			padding: 19.6px 23.8px;
+			border-radius: 4px;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			text-align: center;
+			cursor: pointer;
+			position: relative;
+			-webkit-transition: background 0.2s ease-in-out, color 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			@media (max-width: $screen-xs-max) {
+        width: 100%;
+        height: 65px;
+      }
+			&:hover {
+				background: #006930 !important;
+			}
+    }
+    &-finish {
+			background: #009c48;
+			color: white;
+			font-weight: 500;
+			padding: 19.6px 23.8px;
+			border-radius: 4px;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			text-align: center;
+			cursor: pointer;
+			position: relative;
+			-webkit-transition: background 0.2s ease-in-out, color 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+			transition: background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+			@media (max-width: $screen-xs-max) {
+        width: 100%;
+        height: 65px;
+      }
+			&:hover {
+				background: #006930 !important;
+			}
+		}
+    &-sm {
+        min-width: 0;
+    }
+
+    .form-control-coowner-wrapper & {
+        min-width: 0;
+        padding: 0 15px;
+        font-size: 12px;
+        height: 25px;
+    }
+
+    .btns-horizontal & {
+        width: 100%;
+        .section-survey & {
+            max-width: 160px;
+        }
+    }
+
+    &:hover {
+        color: #fff;
+        background-color: $success;
+    }
+
+    &:active {
+        background-color: $success - 20;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        font-size: $font-size-sm;
+    }
+
+    .section-payment & {
+        position: relative;
+        overflow: hidden;
+        min-height: 50px;
+    }
+
+    .stretch-buttons & {
+        width: 100%;
+    }
+
+    &-default {
+        min-width: 0;
+        padding: 12px 20px;
+    }
+
+    &-disabled {
+        background-color: $gray;
+        color: #fff;
+        pointer-events: none;
+        opacity: .7;
+    }
+
+    & + .btn {
+        margin-left: 10px;
+        .section-footer-xs & {
+            @media (max-width: $screen-xs-max) {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        .btns-inline & {
+            margin-top: 0;
+            .section-footer-xs & {
+                margin-top: 0;
+            }
+        }
+        .btns-vertical & {
+            margin-left: 0;
+            margin-top: 20px;
+        }
+    }
+
+    &-wide {
+        &-xs {
+            @media (max-width: $screen-xs-max) {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.active,
+    &-success {
+        color: white;
+        background-color: $success;
+        border-color: $success;
+        &:hover {
+            background-color: $success - 10;
+        }
+    }
+
+    &-primary {
+        color: white;
+        background-color: $primary;
+        &:hover {
+            background-color: $primary - 10;
+        }
+    }
+
+    &-warning {
+        color: white;
+        background-color: $warning;
+        &:hover {
+            background-color: $warning - 10;
+        }
+    }
+
+    &-danger {
+        color: white;
+        background-color: $danger;
+        &:hover {
+            background-color: $danger - 10;
+        }
+    }
+
+    &-info {
+        color: white;
+        background-color: $info;
+        &:hover {
+            background-color: $info - 10;
+        }
+    }
+    &-clear {
+        background-color: $none;
+    }
+}
+
+.stretch-buttons {
+    display: flex;
+    @media (max-width: $screen-xs-max) {
+        flex-direction: column;
+    }
+}
+
+.btns {
+    &-vertical {
+
+    }
+    &-horizontal {
+        @media (min-width: $screen-sm-min) {
+            align-items: flex-start !important;
+        }
+    }
+    &-wrapper {
+        margin-top: 125px;
+        .btn {
+            min-width: 200px;
+            color: #fff;
+            padding: 17px 0;
+            @media (max-width: $screen-xs-max) {
+                width: 100%;
+            }
+            &.disabled {
+                pointer-events: none;
+                opacity: .8;
+            }
+        }
+        @media (max-width: $screen-xs-max) {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 15px 20px 20px;
+        }
+    }
+}
+
+.btn-fixed {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.button {
+    &-large {
+        max-width: 200px;
+    }
+}

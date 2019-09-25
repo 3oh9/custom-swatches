@@ -1,0 +1,30 @@
+.Polaris-ResourceList__ItemWrapper {
+  .shopifyEditLink {
+    z-index: -1;
+    position: relative;
+    margin-left: 15px;
+    transition: 0.3s ease;
+    opacity: 0;
+    background-color: transparent;
+    border: none;
+  }
+  &:hover {
+    .shopifyEditLink {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+  .listContainer {
+    display: flex;
+    justify-content: space-between;
+    .listWrapper {
+      display: flex;
+      position: relative;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+h2.Polaris-Heading {
+  padding: 1.2rem 2rem;
+}

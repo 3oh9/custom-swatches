@@ -1,0 +1,21 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    text-align: center;
+
+    .Polaris-Button {
+      margin-top: 15px;
+    }
+
+    .Polaris-Labelled__LabelWrapper {
+      opacity: 0.7;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.icons {
+	padding: 0 9px;
+	&.right-arrow {
+		padding: 0 5px;
+		svg {
+			g {
+				path {
+					fill: #999;
+				}
+			}
+			
+		}
+	}
+}

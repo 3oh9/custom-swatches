@@ -1,0 +1,25 @@
+// We don't need to concatenate ".scss" resulting files to one here, that's why we just import "" files
+@import 'reset.scss';
+
+@import 'variable.scss';
+@import 'mixins.scss';
+@import 'grid.css';
+@import 'flex.scss';
+@import 'container.scss';
+@import 'global.scss';
+@import 'icons.scss';
+@import 'btn.scss';
+@import 'polaris.scss';
+@import 'login.scss';
+
+// Forms
+
+// Components
+@import 'typography.scss';
+
+// Vendors
+
+// Containers
+@import 'home.scss';
+
+// Apps

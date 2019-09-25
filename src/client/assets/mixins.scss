@@ -1,0 +1,198 @@
+// border-radius
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+        -o-border-radius: $radius;
+            border-radius: $radius;
+  }
+  // .box {
+  //     @include border-radius(10px);
+  // }
+
+  @mixin transition($property, $duration, $timing){
+      -webkit-transition: $property $duration $timing;
+         -moz-transition: $property $duration $timing;
+          -ms-transition: $property $duration $timing;
+           -o-transition: $property $duration $timing;
+              transition: $property $duration $timing;
+  }
+
+  @mixin transform($transforms) {
+         -moz-transform: $transforms;
+           -o-transform: $transforms;
+          -ms-transform: $transforms;
+      -webkit-transform: $transforms;
+              transform: $transforms;
+  }
+
+  // rotate
+  @mixin rotate ($deg) {
+    @include transform(rotate(#{$deg}deg));
+  }
+
+  // scale
+  @mixin scale($scale) {
+       @include transform(scale($scale));
+  }
+  // translate
+  @mixin translate ($x, $y) {
+     @include transform(translate($x, $y));
+  }
+
+  @mixin gradient ($start, $end, $orientation: false) {
+    @if $orientation == 'reverse' {
+      background: $end; /* Old browsers */
+      background: -moz-linear-gradient(top, $end 0%, $start  100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, $end 0%, $start  100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, $end 0%, $start 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    } @else if $orientation == 'rightCorner' {
+      background: #7db9e8; /* Old browsers */
+      background: -moz-linear-gradient(-45deg, $start 0%, $end 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(-45deg, $start 0%,$end 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(135deg, $start 0%,$end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$start, endColorstr=$end,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    } @else {
+      background: $end; /* Old browsers */
+      background: -moz-linear-gradient(top, $start 0%, $end  100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, $start 0%, $end  100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, $start 0%, $end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+  }
+
+  @mixin box-shadow($top, $left, $blur, $width, $color, $props: false) {
+    @if $props {
+      -webkit-box-shadow:$top $left $blur $width $color, $props;
+      -moz-box-shadow:$top $left $blur $width $color, $props;
+      box-shadow:$top $left $blur $width $color, $props;
+    } @else {
+      -webkit-box-shadow: $top $left $blur $width $color;
+      -moz-box-shadow: $top $left $blur $width $color;
+      box-shadow: $top $left $blur $width $color;
+    }
+  }
+
+  @mixin background-opacity($color, $opacity) {
+    background-color: rgba($color, $opacity);
+  }
+
+  @mixin color-opacity($color, $opacity) {
+    color: rgba($color, $opacity);
+  }
+
+  @mixin btn-box-shadow($top, $left, $blur, $width, $color, $opacity) {
+    -webkit-box-shadow: $top $left $blur $width rgba($color, $opacity);
+    -moz-box-shadow: $top $left $blur $width rgba($color, $opacity);
+    box-shadow: $top $left $blur $width rgba($color, $opacity);
+  }
+
+
+  $colors: (
+    "success":  $success,
+    "primary":  $primary-secondary,
+    "primary-secondary":  $primary-secondary,
+    "info":     $info,
+    "danger":   $danger,
+    "warning":  $warning,
+    "default":  $default,
+    "muted":    $gray,
+    "grey-pale":    $grey-pale,
+  );
+
+  @each $name, $code in $colors {
+    .gradient {
+      &-#{$name} {
+        background: $code; /* Old browsers */
+        background: -moz-linear-gradient(top, $code 0%, ($code - 20) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, $code 0%, ($code - 20) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, $code 0%, ($code - 20) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      }
+    }
+
+    .text {
+      &-color {
+        &-#{$name} {
+          color: $code;
+        }
+      }
+    }
+
+    .btn {
+      &-#{$name} {
+        @include btn-box-shadow(0px, 5px, 5px, 0px, ($code - 150), 0.1);
+        &:hover {
+          @include btn-box-shadow(0px, 9px, 14.7px, 1.3px, ($code - 150), 0.4);
+        }
+        @extend .gradient-#{$name};
+
+        &:active {
+          @include btn-box-shadow(0px, 5px, 5px, 0px, ($code - 150), 0.5);
+        }
+
+        &-bordered {
+          @include box-shadow(inset 0px, 0px, 0px, 2px, $code);
+          position: relative;
+          overflow: hidden;
+
+          &:before,
+          &:after {
+
+            content:'';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            @include border-radius(50px);
+          }
+          &:before {
+            right: 100%;
+            background-color: $code;
+            z-index: -2;
+            @include transition(right, .65s, cubic-bezier(0.62, -0.04, 0, 1.5));
+          }
+
+          &:after {
+            left: 0%;
+            background-color: #fff;
+            z-index: -1;
+            @include transition(left, .45s, cubic-bezier(0.62, -0.04, 0, 1.5));
+          }
+          &:hover {
+            &:before {
+              right: 0%;
+            }
+            &:after {
+              left: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+$header: 6;
+$counter: 50;
+
+@for $i from 0 through $header {
+  h#{$i}, .h#{$i} {
+    color: $headers;
+  }
+}
+
+@for $i from 0 through $counter {
+  .mb#{$i} {
+    margin-bottom: $i + px !important;
+  }
+  .mt#{$i} {
+    margin-top: $i + px !important;
+  }
+  .ml#{$i} {
+    margin-left: $i + px !important;
+  }
+  .mr#{$i} {
+    margin-right: $i + px !important;
+  }
+  .lh#{$i} {
+    line-height: $i;
+  }
+}
