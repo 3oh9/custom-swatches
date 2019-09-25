@@ -1,0 +1,5 @@
+*.env
+node_modules
+build
+ngrok
+.DS_Store
