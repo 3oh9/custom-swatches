@@ -7,14 +7,14 @@
     "dev": "webpack --watch --mode development",
     "build": "rm -rf build && NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
     "start-pm2": "pm2 start nodemon ./src/server/index.js --exec babel-node --presets es2015",
-    "start": "nodemon ./src/server/index.js --exec babel-node babel-plugin-graphql-tag --presets es2015",
+    "start": "node ./src/server/index.js --env production --exec babel-node --presets es2015",
     "heroku-postbuild": "yarn build",
     "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "schema:transform-to-types": "graphql-js-schema --schema-file schema.json --outdir ./src --schema-bundle-name 'Types' --bundle-only"
   },
   "engines": {
-    "node" : "10.6.0"
+    "node": "10.16.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -53,7 +53,7 @@
     "currency-symbol-map": "^4.0.4",
     "dotenv": "^5.0.1",
     "esm": "^3.2.25",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "global": "^4.4.0",
     "graphql": "^14.5.3",
     "graphql-js-client": "^0.11.1",

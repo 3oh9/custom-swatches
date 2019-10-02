@@ -19,9 +19,8 @@ cd /src/server/sequelize
 ```
 export NODE_ENV=development
 
-export SHOPIFY_API_KEY=df9dbc6a6c4fe372061c59b207328385
-export SHOPIFY_API_SECRET=d902998536fec82412a88bae447714e0
-
+export SHOPIFY_API_KEY=[key]
+export SHOPIFY_API_SECRET=[secret]
 # AWS DB
 export DB_USER=[DB_USER]
 export DB_PASSWORD=[DB_PASSWORD]

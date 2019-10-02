@@ -3,3 +3,5 @@ node_modules
 build
 ngrok
 .DS_Store
+.idea/*
+package-lock.json
