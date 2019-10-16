@@ -1,13 +1,13 @@
 {
-  "name": "react-express-app",
+  "name": "custom-swatches",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev": "webpack --watch --mode development",
-    "build": "rm -rf build && NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
     "start-pm2": "pm2 start nodemon ./src/server/index.js --exec babel-node --presets es2015",
-    "start": "node -r esm ./src/server/index.js --env production",
+    "start": "npm install && npm run-script build && node -r esm ./src/server/index.js --env production",
     "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "schema:transform-to-types": "graphql-js-schema --schema-file schema.json --outdir ./src --schema-bundle-name 'Types' --bundle-only"
@@ -98,9 +98,7 @@
     "sweetalert": "^2.1.0",
     "terser-webpack-plugin": "^1.3.0",
     "url-loader": "^1.0.1",
-    "webpack-cli": "^3.1.2"
-  },
-  "devDependencies": {
+    "webpack-cli": "^3.1.2",
     "babel-core": "^6.26.3",
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.11",

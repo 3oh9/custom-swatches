@@ -1,0 +1,9 @@
+applications:
+- name: custom-swatches
+  command: npm run-script start
+  disk_quota: 1G
+  instances: 1
+  memory: 756M
+  routes:
+  - route: custom-swatches.cfapps.io
+  stack: cflinuxfs3
