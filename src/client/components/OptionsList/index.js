@@ -258,7 +258,7 @@ class OptionsList extends Component {
         media={media}
         accessibilityLabel={`Edit option ${item.name}`}
         persistActions
-        onClick={optionsImages.length ? this.handleModalOpen : false}
+        onClick={this.handleModalOpen}
       >
         <div className="listContainer">
           <div className="listWrapper">
@@ -268,7 +268,6 @@ class OptionsList extends Component {
                 flexDirection: 'row',
               }}
             >
-              {optionsImages.length === 0 && <TextStyle variation="subdued">Variant image is not set</TextStyle>}
               {item.image && (
                 <button
                   className="shopifyEditLink"
@@ -397,6 +396,7 @@ class OptionsList extends Component {
             <ImageCrop
               data={optionItem}
               currentImage={null}
+              productImages={product.item.images}
               imageCrop={imageCrop}
               updateImageCrop={updateImageCrop}
             />
