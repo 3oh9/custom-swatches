@@ -13,6 +13,7 @@ class ImageCropComponent extends Component {
       name: string,
       images: arrayOf(shape()),
     }).isRequired,
+    productImages: arrayOf(shape()),
     updateImageCrop: func.isRequired,
     imageCrop: shape().isRequired,
   }
@@ -22,7 +23,7 @@ class ImageCropComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: this.onSelectFromVariant(this.props.data.images[0].src),
+      src: this.onSelectFromVariant(this.props.data.productImages[0].src),
       crop: {
         unit: 'px',
         width: 50,
@@ -144,7 +145,7 @@ class ImageCropComponent extends Component {
       crop, croppedImageUrl, src, fileValue, active
     } = this.state;
     const { handleImageClick } = this;
-    const { data } = this.props;
+    const { data, productImages } = this.props;
     const firstImage = null;
 
     const imageMarkup = (image, index) => (
@@ -161,26 +162,20 @@ class ImageCropComponent extends Component {
       />
     );
 
-    const galleryMarkup = (
-      data.images.length ? (
+    const productImagesGallery = (
+      productImages.length ? (
         <Fragment>
           <h3 className="gallery__title">Choose image:</h3>
           <div className="gallery">
-            {data.images.map((image, index) => imageMarkup(image, index))}
+            {productImages.map((image, index) => imageMarkup(image, index))}
           </div>
         </Fragment>
       ) : (<h3 className="gallery__title">There are no images</h3>)
-      // (
-      //   <div>
-      //     <h3 className="gallery__title">Choose image:</h3>
-      //     <input type="file" onChange={this.onSelectFile} />
-      //   </div>
-      // )
     );
 
     return (
       <Fragment>
-        {galleryMarkup}
+        { productImagesGallery }
 
         {src && (
           <Fragment>
@@ -196,13 +191,6 @@ class ImageCropComponent extends Component {
             />
           </Fragment>
         )}
-
-        {/* {croppedImageUrl && (
-          <Fragment>
-            <h3>Swatch Preview</h3>
-            <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
-          </Fragment>
-        )} */}
       </Fragment>
     );
   }

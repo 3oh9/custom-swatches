@@ -116,6 +116,45 @@ class ProductsList extends Component {
       </ResourceList.Item>
     );
 
+    const resourceItemWithoutImages  = (
+      <ResourceList.Item
+        id={id}
+        media={media}
+        accessibilityLabel={`View details for ${title}`}
+        persistActions
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              position: 'relative',
+            }}
+          >
+            {title}
+            <div className="shopifyEditLink">
+              <Tooltip
+                className="shopifyEditLink"
+                content={`View ${title} in shopify admin`}
+              >
+                <a
+                  href={`https://${shop}/admin/products/${id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon
+                    source={ViewMinor}
+                    color="black"
+                    accessibilityLabel={`View ${title} in shopify admin`}
+                  />
+                </a>
+              </Tooltip>
+            </div>
+          </div>
+          <TextStyle variation="subdued">There are no images</TextStyle>
+        </div>
+      </ResourceList.Item>
+    );
+
     const resourceWithColor = (
       <ResourceList.Item
         id={id}
@@ -159,7 +198,7 @@ class ProductsList extends Component {
       </ResourceList.Item>
     );
 
-    return colorOption ? resourceWithColor : resourceItemWithoutColor;
+    return colorOption ? ( item.images.length ? resourceWithColor : resourceItemWithoutImages ) : resourceItemWithoutColor;
   };
 
   render() {
