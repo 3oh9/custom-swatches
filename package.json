@@ -7,13 +7,13 @@
     "dev": "webpack --watch --mode development",
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
     "start-pm2": "pm2 start nodemon ./src/server/index.js --exec babel-node --presets es2015",
-    "start": "npm install && npm run-script build && node -r esm ./src/server/index.js --env production",
+    "start": "yarn install && yarn build && node -r esm ./src/server/index.js --env production",
     "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "schema:transform-to-types": "graphql-js-schema --schema-file schema.json --outdir ./src --schema-bundle-name 'Types' --bundle-only"
   },
   "engines": {
-    "node": "10.16.3"
+    "node": "10.19.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",

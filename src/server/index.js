@@ -40,4 +40,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 8080);
