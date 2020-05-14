@@ -23,7 +23,7 @@ class ImageCropComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: this.onSelectFromVariant(this.props.data.productImages[0].src),
+      src: this.onSelectFromVariant(this.props.productImages[0].src),
       crop: {
         unit: 'px',
         width: 50,
