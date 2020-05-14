@@ -1,14 +1,24 @@
-# This is a basic workflow to help you get started with Actions
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: CD
+name: Deploy
 
-workflow "Deploy to PCF after build" { resolves = ["Deploy to PCF"] on = "push" }
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
-action "Deploy to PCF" {
-  uses = "d3sandoval/cloud-foundry-action@1.1.1"
-  secrets = ["support@3oh9.io", "309WWash!"]
-  env = {
-    CF_TARGET_ORG = "3oh9"
-    CF_TARGET_SPACE = "dev"
-  }
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+    - uses: d3sandoval/cloud-foundry-action@1.1.1
+      env:
+        CF_TARGET_ORG: 3oh9
+        CF_TARGET_SPACE: dev
+        CF_USERNAME: ${{ secrets.CF_USERNAME }}
+        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+
