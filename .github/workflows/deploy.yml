@@ -12,14 +12,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
     steps:
     - uses: actions/checkout@v2
     - uses: d3sandoval/cloud-foundry-action@1.1.1
       with:
-        args: push
+        args: push custom-swatches-dev
       env:
         CF_TARGET_ORG: 3oh9
         CF_TARGET_SPACE: dev
