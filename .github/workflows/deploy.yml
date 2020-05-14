@@ -17,11 +17,10 @@ jobs:
         node-version: [10.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - name: deploy PCF
     - uses: d3sandoval/cloud-foundry-action@1.1.1
       with:
-        args: push -p custom-swatches
+        args: push
       env:
         CF_TARGET_ORG: 3oh9
         CF_TARGET_SPACE: dev
