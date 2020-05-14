@@ -16,6 +16,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Deploy
     - uses: d3sandoval/cloud-foundry-action@1.1.1
+      with:
+        args: push
       env:
         CF_TARGET_ORG: 3oh9
         CF_TARGET_SPACE: dev
