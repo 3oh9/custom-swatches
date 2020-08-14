@@ -53,6 +53,6 @@ export default (req, res, next) => {
   }
 
   if (reqShop && reqShop !== 'undefined') {
-    res.cookie('shop', reqShop);
+    res.cookie('shop', reqShop, {sameSite: 'none', secure: true});
   }
 };

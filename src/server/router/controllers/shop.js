@@ -29,8 +29,8 @@ export const generateShopifyCallback = async (req, res, next) => {
     return next(err);
   }
 
-  res.cookie('shop', shop);
-  return res.redirect(`https://${shop}/admin/apps/custom-swatches-1`);
+  res.cookie('shop', shop, {sameSite: 'none', secure: true});
+  return res.redirect(`https://${shop}/admin/apps/custom-swatches-2`);
 };
 
 
@@ -43,7 +43,7 @@ export const shopifyInstall = async (req, res, next) => {
     const state = nonce();
     const redirectUri = `${forwardingAddress}/api/v1/auth/callback`;
     const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${config.apiKey}&scope=${scopes}&state=${state}&redirect_uri=${redirectUri}`;
-    res.cookie('state', state);
+    res.cookie('state', state, {sameSite: 'none', secure: true});
     res.redirect(installUrl);
   } else {
     res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
