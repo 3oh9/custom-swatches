@@ -5,7 +5,7 @@ import config from '../../utils/config';
 import models from '../../sequelize/models';
 
 const createWebhook = async (shop, token, webhook) => {
-  const url = `https://${shop}/admin/api/2019-04/webhooks.json`;
+  const url = `https://${shop}/admin/api/2020-04/webhooks.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -45,7 +45,7 @@ const createWebhook = async (shop, token, webhook) => {
 };
 
 const bulkCreateWebhook = async (shop, token, webhooks) => {
-  const url = `https://${shop}/admin/api/2019-04/webhooks.json`;
+  const url = `https://${shop}/admin/api/2020-04/webhooks.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -89,7 +89,7 @@ const bulkCreateWebhook = async (shop, token, webhooks) => {
 };
 
 const removeWebhook = async (shop, token, webhookId) => {
-  const url = `https://${shop}/admin/api/2019-04/webhooks/${webhookId}.json`;
+  const url = `https://${shop}/admin/api/2020-04/webhooks/${webhookId}.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -110,7 +110,7 @@ const removeWebhook = async (shop, token, webhookId) => {
 };
 
 const bulkRemoveWebhook = async (shop, token, webhooks) => {
-  const url = webhookId => `https://${shop}/admin/api/2019-04/webhooks/${webhookId}.json`;
+  const url = webhookId => `https://${shop}/admin/api/2020-04/webhooks/${webhookId}.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -190,7 +190,7 @@ const bulkRemoveShopWebhooks = async (shop, token) => {
 };
 
 const getWebhookList = async (shop, token) => {
-  const url = `https://${shop}/admin/api/2019-04/webhooks.json`;
+  const url = `https://${shop}/admin/api/2020-04/webhooks.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };

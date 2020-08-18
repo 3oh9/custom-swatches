@@ -12,7 +12,7 @@ const includeHeaders = (body, response, resolveWithFullResponse) => (
 );
 
 const getProducts = async (shop, token, limit = 50, pageInfo = '') => {
-  const url = `https://${shop}/admin/api/2019-10/products.json?limit=${limit}&page_info=${pageInfo}`;
+  const url = `https://${shop}/admin/api/2020-04/products.json?limit=${limit}&page_info=${pageInfo}`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -65,7 +65,7 @@ const getProducts = async (shop, token, limit = 50, pageInfo = '') => {
 };
 
 const getProduct = async (shop, token, productId) => {
-  const url = `https://${shop}/admin/api/2019-10/products/${productId}.json`;
+  const url = `https://${shop}/admin/api/2020-04/products/${productId}.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -80,7 +80,7 @@ const getProduct = async (shop, token, productId) => {
 };
 
 const updateProduct = async (shop, token, productId, product) => {
-  const url = `https://${shop}/admin/api/2019-10/products/${productId}.json`;
+  const url = `https://${shop}/admin/api/2020-04/products/${productId}.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -95,7 +95,7 @@ const updateProduct = async (shop, token, productId, product) => {
 };
 
 const getProductMetafields = async (shop, token, productId) => {
-  const url = `https://${shop}/admin/api/2019-10/products/${productId}/metafields.json`;
+  const url = `https://${shop}/admin/api/2020-04/products/${productId}/metafields.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -110,7 +110,7 @@ const getProductMetafields = async (shop, token, productId) => {
 };
 
 const createProductMetafield = async (shop, token, productId, metafield) => {
-  const url = `https://${shop}/admin/api/2019-10/products/${productId}/metafields.json`;
+  const url = `https://${shop}/admin/api/2020-04/products/${productId}/metafields.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -126,7 +126,7 @@ const createProductMetafield = async (shop, token, productId, metafield) => {
 };
 
 const deleteProductMetafield = async (shop, token, productId, metafieldId) => {
-  const url = `https://${shop}/admin/api/2019-10/products/${productId}/metafields/${metafieldId}.json`;
+  const url = `https://${shop}/admin/api/2020-04/products/${productId}/metafields/${metafieldId}.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -147,7 +147,7 @@ const getGqlProducts = async (currentShopUrl, token, limit, after, before) => {
   const query = getProductsQuery(limit, after, before);
 
   const httpLink = createHttpLink({
-    uri: `https://${currentShopUrl}/admin/api/2019-07/graphql.json`,
+    uri: `https://${currentShopUrl}/admin/api/2020-04/graphql.json`,
     fetch,
   });
 

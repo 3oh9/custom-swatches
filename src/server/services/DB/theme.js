@@ -1,7 +1,7 @@
 import request from 'request-promise';
 
 const getThemes = async (shop, token) => {
-  const url = `https://${shop}/admin/api/2019-10/themes.json`;
+  const url = `https://${shop}/admin/api/2020-04/themes.json`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
@@ -17,7 +17,7 @@ const getThemes = async (shop, token) => {
 };
 
 const getMainTheme = async (shop, token) => {
-  const url = `https://${shop}/admin/api/2019-10/themes.json?role=main`;
+  const url = `https://${shop}/admin/api/2020-04/themes.json?role=main`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };
