@@ -1,0 +1,14 @@
+{
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react",
+      "shopify/node"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "transform-es2015-classes",
+      "graphql-js-client-transform"
+    ]
+  }
