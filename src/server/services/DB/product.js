@@ -141,10 +141,10 @@ const deleteProductMetafield = async (shop, token, productId, metafieldId) => {
   return productMetafieldsResult;
 };
 
-const getGqlProducts = async (currentShopUrl, token, limit, after, before) => {
+const getGqlProducts = async (currentShopUrl, token, limit, title, after, before) => {
   let productsResponse;
 
-  const query = getProductsQuery(limit, after, before);
+  const query = getProductsQuery(limit, title, after, before);
 
   const httpLink = createHttpLink({
     uri: `https://${currentShopUrl}/admin/api/2020-04/graphql.json`,

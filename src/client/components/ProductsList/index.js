@@ -10,7 +10,7 @@ import {
   Icon,
 } from '@shopify/polaris';
 
-import { ViewMinor } from '@shopify/polaris-icons';
+import { ViewMinor, CircleTickMajorMonotone } from '@shopify/polaris-icons';
 
 import '@shopify/polaris/styles.css';
 import './style.scss';
@@ -52,11 +52,12 @@ class ProductsList extends Component {
 
   renderItem = (item) => {
     const {
-      id,
       title,
-      image,
       options,
-    } = item;
+    } = item.node;
+
+    const id = item.node.legacyResourceId;
+    const image = item.node.featuredImage ? item.node.featuredImage.src : false;
 
     const { shop } = this.props;
 
@@ -69,7 +70,7 @@ class ProductsList extends Component {
           alt={`Photo of ${title}`}
         />);
     } else {
-      media = (<Thumbnail size="small" source={image.src} alt={`Photo of ${title}`} />);
+      media = (<Thumbnail size="small" source={image} alt={`Photo of ${title}`} />);
     }
 
     const colorOption = options.find((optionItem) => {
@@ -194,11 +195,16 @@ class ProductsList extends Component {
               </Tooltip>
             </div>
           </div>
+          {item.node.metafields.edges.length ?  <TextStyle variation="subdued"><Icon
+            source={CircleTickMajorMonotone}
+            color="green"
+            accessibilityLabel={`View ${title} in shopify admin`}
+          /></TextStyle> : null}
         </div>
       </ResourceList.Item>
     );
 
-    return colorOption ? ( item.images.length ? resourceWithColor : resourceItemWithoutImages ) : resourceItemWithoutColor;
+    return colorOption ? ( item.node.images.edges.length ? resourceWithColor : resourceItemWithoutImages ) : resourceItemWithoutColor;
   };
 
   render() {

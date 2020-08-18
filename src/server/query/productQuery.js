@@ -56,52 +56,43 @@ export const searchProducts = (limit, title, after, before) => gql`
   }
 `;
 
-export const getProducts = (limit, after, before) => gql`
+export const getProducts = (limit, title, after, before) => gql`
   {
     products(
-      first:${limit},
-      ${after ? `after:${after}` : ''}
-      ${before ? `after:${before}` : ''}
+      ${!after && !before ? `first:${limit}` : ''}
+      ${after ? `first:${limit}, after:"${after}"` : ''}
+      ${before ? `last:${limit}, before:"${before}"` : ''}
+      ${title ? `query:"*${title}*"` : ''}
     ){
       pageInfo {
         hasNextPage
         hasPreviousPage
       }
-      edges{
+      edges {
         cursor
-        node{
+        node {
+          legacyResourceId
           id
           title
           featuredImage {
-            id
+            src
           }
-          handle
-          images(first: 5) {
+          images(first: 1) {
             edges {
               node {
-                id
                 src
               }
             }
           }
-          metafields(first: 10) {
+          options(first: 5) {
+            name
+          }
+          metafields(first: 1, namespace: "custom-swatch") {
             edges {
               node {
-                description
                 key
                 value
                 namespace
-              }
-            }
-          }
-          tags
-          variants(first: 20) {
-            edges {
-              node {
-                id
-                sku
-                title
-                displayName
               }
             }
           }

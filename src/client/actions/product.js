@@ -14,6 +14,7 @@ import {
 
 import {
   getApiProductsPath,
+  getGqlApiProductsPath,
   getApiProductPath,
   searchApiProductsPath,
   getApiProductMetafieldsPath,
@@ -34,6 +35,23 @@ export const fetchProducts = (shop, limit, pageInfo = '') => (dispatch) => {
 
   axios.post(`${getApiProductsPath}`, { shop, limit, pageInfo }).then((res) => {
     const { products, next, prev } = res.data.result;
+
+    dispatch(fetchProductsFinished({ list: products, next, prev }));
+  }, (error) => {
+    dispatch(fetchProductsFinished({
+      error: error.response.data,
+      hasError: true,
+    }));
+  });
+};
+
+export const fetchGqlProducts = (shop, limit, title, after, before) => (dispatch) => {
+  dispatch(fetchProductsStarted());
+
+  axios.post(`${getGqlApiProductsPath}`, { shop, limit, title, after, before }).then((res) => {
+    const products = res.data.result.data.products.edges;
+    const prev = products[0].cursor && res.data.result.data.products.pageInfo.hasPreviousPage ? products[0].cursor : null;
+    const next = products[products.length - 1].cursor && res.data.result.data.products.pageInfo.hasNextPage ? products[products.length - 1].cursor : null;
 
     dispatch(fetchProductsFinished({ list: products, next, prev }));
   }, (error) => {
