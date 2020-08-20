@@ -50,10 +50,11 @@ export const fetchGqlProducts = (shop, limit, title, after, before) => (dispatch
 
   axios.post(`${getGqlApiProductsPath}`, { shop, limit, title, after, before }).then((res) => {
     const products = res.data.result.data.products.edges;
-    const prev = products[0].cursor && res.data.result.data.products.pageInfo.hasPreviousPage ? products[0].cursor : null;
-    const next = products[products.length - 1].cursor && res.data.result.data.products.pageInfo.hasNextPage ? products[products.length - 1].cursor : null;
+    const pageInfo = res.data.result.data.products.pageInfo;
+    const prev = products.length && products[0].cursor && pageInfo.hasPreviousPage ? products[0].cursor : null;
+    const next = products.length && products[products.length - 1].cursor && pageInfo.hasNextPage ? products[products.length - 1].cursor : null;
 
-    dispatch(fetchProductsFinished({ list: products, next, prev }));
+    dispatch(fetchProductsFinished({ list: products, title, next, prev }));
   }, (error) => {
     dispatch(fetchProductsFinished({
       error: error.response.data,

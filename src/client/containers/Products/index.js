@@ -25,11 +25,12 @@ class Products extends Component {
 
     product: shape({
       list: array,
+      title: string,
+      prev: string,
+      next: string,
       fetching: bool,
       fetched: bool,
       pageToken: string,
-      // next: {href, rel, token} or ''
-      // prev: {href, rel, token} or ''
     }).isRequired,
 
     history: shape().isRequired,
@@ -37,38 +38,21 @@ class Products extends Component {
 
   constructor(props) {
     super(props);
+    const { next, prev } = this.props.product;
     this.state = {
-      isFirstPage: true,
-      isLastPage: false,
       limit: 20,
       shop: cookie.load('shop'),
-      title: '',
     };
   }
 
   componentDidMount() {
-    const { fetched } = this.props.product;
+    const { fetched, title } = this.props.product;
     const { shop, limit } = this.state;
 
     if (!fetched) {
       this.props.fetchMainTheme(shop);
-      this.props.fetchGqlProducts(shop, limit);
+      this.props.fetchGqlProducts(shop, limit, title);
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.product.fetching && this.props.product.fetched) {
-      const { next, prev } = this.props.product;
-
-      this.setPagination(prev, next);
-    }
-  }
-
-  setPagination = (prev, next) => {
-    this.setState({
-      isFirstPage: !prev,
-      isLastPage: !next,
-    });
   }
 
   handleProductClick = (productId) => {
@@ -88,9 +72,6 @@ class Products extends Component {
 
   handleNextPage = () => {
     this.handlePagination('next');
-    this.setState({
-      isFirstPage: false,
-    });
   }
 
   handleSearch = (shop, limit, string) => {
@@ -102,15 +83,15 @@ class Products extends Component {
 
   render() {
     const { product } = this.props;
-    const { list, next } = product;
-    const { isFirstPage, isLastPage, shop } = this.state;
+    const { list, next, title, limit, prev } = product;
+    const { shop } = this.state;
     const { handleProductClick, handlePagination, handleSearch, handlePreviousPage, handleNextPage } = this;
 
     const paginationMarkup =
       list.length > 0 ? (
         <Pagination
-          hasPrevious={!isFirstPage}
-          hasNext={!isLastPage}
+          hasPrevious={prev}
+          hasNext={next}
           onPrevious={handlePreviousPage}
           onNext={handleNextPage}
         />) : null;
@@ -131,6 +112,8 @@ class Products extends Component {
                     <Card>
                       <ProductsList
                         list={list}
+                        title={title}
+                        limit={limit}
                         onProductClick={handleProductClick}
                         handlePagination={handlePagination}
                         hasNextPage={hasNextPage}

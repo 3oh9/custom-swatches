@@ -18,6 +18,7 @@ import './style.scss';
 class ProductsList extends Component {
   static propTypes = {
     list: arrayOf(shape()),
+    title: string,
     onProductClick: func.isRequired,
     loading: bool,
     shop: string,
@@ -29,13 +30,14 @@ class ProductsList extends Component {
     list: [],
     loading: true,
     shop: '',
-    limit: 50,
+    limit: 20,
   }
 
   constructor(props) {
     super(props);
+    const { title } = this.props;
     this.state = {
-      searchValue: '',
+      searchValue: title ? title : '',
     };
   }
 
@@ -223,7 +225,6 @@ class ProductsList extends Component {
         additionalAction={{
           content: 'Search',
           onAction: () => {
-            console.log('handleSearchSubmit');
             handleSearchSubmit();
           },
         }}
