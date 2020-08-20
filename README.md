@@ -74,13 +74,13 @@ _______________________
 #### Start Client
 
 ```
-yarn dev
+yarn front-dev
 ```
 
 #### Start Server
 
 ```
-yarn start
+yarn back-dev
 ```
 
 ## Deploy
