@@ -15,22 +15,22 @@ import { productsPath } from '../../utils/paths';
 
 import ProductsList from '../../components/ProductsList';
 
-import { fetchProducts, searchProducts } from '../../actions/product';
+import { fetchGqlProducts } from '../../actions/product';
 import { fetchMainTheme } from '../../actions/theme';
 
 class Products extends Component {
   static propTypes = {
-    fetchProducts: func.isRequired,
-    searchProducts: func.isRequired,
+    fetchGqlProducts: func.isRequired,
     fetchMainTheme: func.isRequired,
 
     product: shape({
       list: array,
+      title: string,
+      prev: string,
+      next: string,
       fetching: bool,
       fetched: bool,
       pageToken: string,
-      // next: {href, rel, token} or ''
-      // prev: {href, rel, token} or ''
     }).isRequired,
 
     history: shape().isRequired,
@@ -38,37 +38,21 @@ class Products extends Component {
 
   constructor(props) {
     super(props);
+    const { next, prev } = this.props.product;
     this.state = {
-      isFirstPage: true,
-      isLastPage: false,
-      limit: 50,
+      limit: 20,
       shop: cookie.load('shop'),
     };
   }
 
   componentDidMount() {
-    const { fetched } = this.props.product;
+    const { fetched, title } = this.props.product;
     const { shop, limit } = this.state;
 
     if (!fetched) {
       this.props.fetchMainTheme(shop);
-      this.props.fetchProducts(shop, limit);
+      this.props.fetchGqlProducts(shop, limit, title);
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.product.fetching && this.props.product.fetched) {
-      const { next, prev } = this.props.product;
-
-      this.setPagination(prev, next);
-    }
-  }
-
-  setPagination = (prev, next) => {
-    this.setState({
-      isFirstPage: !prev,
-      isLastPage: !next,
-    });
   }
 
   handleProductClick = (productId) => {
@@ -76,10 +60,10 @@ class Products extends Component {
   };
 
   handlePagination = (key) => {
-    const { shop, limit } = this.state;
+    const { shop, limit, title } = this.state;
     const { next, prev } = this.props.product;
 
-    this.props.fetchProducts(shop, limit, key === 'next' ? next.token : prev.token);
+    this.props.fetchGqlProducts(shop, limit, title, key === 'next' ? next : null, key === 'prev' ? prev : null);
   }
 
   handlePreviousPage = () => {
@@ -88,65 +72,73 @@ class Products extends Component {
 
   handleNextPage = () => {
     this.handlePagination('next');
+  }
+
+  handleSearch = (shop, limit, string) => {
     this.setState({
-      isFirstPage: false,
+      title: string
     });
+    this.props.fetchGqlProducts(shop, this.state.limit, string);
   }
 
   render() {
     const { product } = this.props;
-    const { list, hasNextPage } = product;
-    const { isFirstPage, isLastPage, shop } = this.state;
-    const { handleProductClick, handlePagination } = this;
+    const { list, next, title, limit, prev } = product;
+    const { shop } = this.state;
+    const { handleProductClick, handlePagination, handleSearch, handlePreviousPage, handleNextPage } = this;
 
     const paginationMarkup =
       list.length > 0 ? (
         <Pagination
-          hasPrevious={!isFirstPage}
-          hasNext={!isLastPage}
-          onPrevious={this.handlePreviousPage}
-          onNext={this.handleNextPage}
+          hasPrevious={prev}
+          hasNext={next}
+          onPrevious={handlePreviousPage}
+          onNext={handleNextPage}
         />) : null;
 
     const loading = product.fetching;
+    const hasNextPage = next ? true : false;
 
     return (
       <Frame>
-        {/* {loading && <Loading />} */}
-        <Page title="Custom Swatches">
-          <Layout>
-            <Layout.Section
-              title="title"
-              description="description"
-            >
-              <Card>
-                <Card>
-                  <ProductsList
-                    list={list}
-                    onProductClick={handleProductClick}
-                    handlePagination={handlePagination}
-                    hasNextPage={hasNextPage}
-                    loading={loading}
-                    shop={shop}
-                    handleSearch={this.props.searchProducts}
-                  />
-                </Card>
-                {!loading && (
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      padding: '24px 16px',
-                      borderTop: '1px solid #dfe4e8',
-                    }}
-                  >
-                    {paginationMarkup}
-                  </div>)
-                }
-              </Card>
-            </Layout.Section>
-          </Layout>
-        </Page>
+        {list && (
+            <Page title="Custom Swatches">
+              <Layout>
+                <Layout.Section
+                  title="title"
+                  description="description"
+                >
+                  <Card>
+                    <Card>
+                      <ProductsList
+                        list={list}
+                        title={title}
+                        limit={limit}
+                        onProductClick={handleProductClick}
+                        handlePagination={handlePagination}
+                        hasNextPage={hasNextPage}
+                        loading={loading}
+                        shop={shop}
+                        handleSearch={handleSearch}
+                      />
+                    </Card>
+                    {!loading && (
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          padding: '24px 16px',
+                          borderTop: '1px solid #dfe4e8',
+                        }}
+                      >
+                        {paginationMarkup}
+                      </div>)
+                    }
+                  </Card>
+                </Layout.Section>
+              </Layout>
+            </Page>
+        )}
       </Frame>
     );
   }
@@ -157,8 +149,7 @@ const mapStateToProps = ({ product }) => ({
 });
 
 const mapDispatchToProps = {
-  fetchProducts,
-  searchProducts,
+  fetchGqlProducts,
   fetchMainTheme,
 };
 

@@ -14,6 +14,7 @@ import {
 
 import {
   getApiProductsPath,
+  getGqlApiProductsPath,
   getApiProductPath,
   searchApiProductsPath,
   getApiProductMetafieldsPath,
@@ -36,6 +37,24 @@ export const fetchProducts = (shop, limit, pageInfo = '') => (dispatch) => {
     const { products, next, prev } = res.data.result;
 
     dispatch(fetchProductsFinished({ list: products, next, prev }));
+  }, (error) => {
+    dispatch(fetchProductsFinished({
+      error: error.response.data,
+      hasError: true,
+    }));
+  });
+};
+
+export const fetchGqlProducts = (shop, limit, title, after, before) => (dispatch) => {
+  dispatch(fetchProductsStarted());
+
+  axios.post(`${getGqlApiProductsPath}`, { shop, limit, title, after, before }).then((res) => {
+    const products = res.data.result.data.products.edges;
+    const pageInfo = res.data.result.data.products.pageInfo;
+    const prev = products.length && products[0].cursor && pageInfo.hasPreviousPage ? products[0].cursor : null;
+    const next = products.length && products[products.length - 1].cursor && pageInfo.hasNextPage ? products[products.length - 1].cursor : null;
+
+    dispatch(fetchProductsFinished({ list: products, title, next, prev }));
   }, (error) => {
     dispatch(fetchProductsFinished({
       error: error.response.data,

@@ -119,14 +119,14 @@ export const deleteProductMetafield = async (req, res, next) => {
 export const getGqlProducts = async (req, res, next) => {
   const { shop, token } = req.appContext;
   const {
-    limit, after, before,
+    limit, after, before, title,
   } = req.body;
 
   let productsResponse;
 
   try {
     productsResponse = await productDBService
-      .getGqlProducts(shop, token, limit, after, before);
+      .getGqlProducts(shop, token, limit, title, after, before);
   } catch (err) {
     return next(err);
   }

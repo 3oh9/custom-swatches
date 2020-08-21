@@ -20,7 +20,7 @@ const searchProducts = async (
   const query = searchProductsQuery(limit, title, after, before);
 
   const httpLink = createHttpLink({
-    uri: `https://${currentShopUrl}/admin/api/2019-07/graphql.json`,
+    uri: `https://${currentShopUrl}/admin/api/2020-04/graphql.json`,
     fetch,
   });
 
@@ -58,7 +58,7 @@ const includeHeaders = (body, response, resolveWithFullResponse) => (
 );
 
 const searchProductsRest = async (shop, token, limit = 50, title = '') => {
-  const url = `https://${shop}/admin/api/2019-10/products.json?limit=${limit}&title=${title}`;
+  const url = `https://${shop}/admin/api/2020-04/products.json?limit=${limit}&title=${title}`;
   const shopRequestHeaders = {
     'X-Shopify-Access-Token': token,
   };

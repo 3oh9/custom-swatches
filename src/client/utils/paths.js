@@ -9,6 +9,7 @@ export const configPath = `${config.apiPath}/config`;
 
 // Product
 export const getApiProductsPath = `${config.apiPath}/products`;
+export const getGqlApiProductsPath = `${config.apiPath}/gql/products`;
 export const getApiProductPath = productId => `${config.apiPath}/products/${productId}`;
 
 // Product Metafields
