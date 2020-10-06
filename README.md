@@ -1,5 +1,6 @@
 # Swatches Shopify APP
 
+Deploys to Heroku
 ## Short setup
 
 Create and configure .env file or env variables (set database configurations)
